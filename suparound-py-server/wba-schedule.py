@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
