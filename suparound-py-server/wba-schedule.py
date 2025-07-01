@@ -4,6 +4,7 @@
 # In[ ]:
 
 
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
@@ -104,6 +105,9 @@ def get_wba_schedule():
     return jsonData
 
 if __name__ == "__main__": 
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
 
 
+
+# %%
