@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[ ]:
+
 import os
 import chromedriver_binary
 from selenium import webdriver
@@ -5,6 +10,9 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify
 import time
+
+from selenium.webdriver.chrome.service import Service
+import shutil
 
 app = Flask(__name__)
 
@@ -23,7 +31,9 @@ def get_wba_schedule():
     # options.add_argument("window-size=1920x1080")
     # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 
-    driver = webdriver.Chrome(options=options)
+    chromedriver_path = shutil.which("chromedriver")  # PATH에 등록된 경로 확인
+    service = Service(executable_path=chromedriver_path)
+    driver = webdriver.Chrome(service=service, options=options)
 
     url = 'https://www.wbaboxing.com/wba-fights-schedule#'
     driver.get(url)
@@ -109,5 +119,3 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port, debug=True)
 
 
-
-# %%
