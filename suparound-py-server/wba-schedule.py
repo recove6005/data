@@ -13,6 +13,10 @@ import time
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return 'Hello from Flask.'
+
 @app.route('/wba-schedule', methods=['GET'])
 def get_wba_schedule():
     # ✅ Chrome 옵션 설정
