@@ -23,7 +23,7 @@ def home():
 @app.route('/wba-schedule', methods=['GET'])
 def get_wba_schedule():
     # ✅ Chrome 옵션 설정
-    options = Options()
+    options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
