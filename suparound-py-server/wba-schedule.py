@@ -2,8 +2,7 @@
 # coding: utf-8
 
 # In[ ]:
-import chromedriver_autoinstaller
-chromedriver_autoinstaller.install()
+
 
 import os
 from selenium import webdriver
@@ -25,14 +24,14 @@ def home():
 def get_wba_schedule():
     # ✅ Chrome 옵션 설정
     options = webdriver.ChromeOptions()
+    options.binary_location = "/usr/bin/google-chrome"  # 명시적 지정
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
-    options.add_argument("--disable-dev-shm-usage")
-    # options.add_argument("window-size=1920x1080")
-    # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+    options.add_argument('--disable-dev-shm-usage')
 
-    chromedriver_path = shutil.which("chromedriver")  # PATH에 등록된 경로 확인
+    import chromedriver_autoinstaller
+    chromedriver_path = chromedriver_autoinstaller.install()
     service = Service(executable_path=chromedriver_path)
     driver = webdriver.Chrome(service=service, options=options)
 

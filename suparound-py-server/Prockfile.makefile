@@ -1,1 +1,1 @@
-web: python wba-schedule.py
+web: bash start.sh
