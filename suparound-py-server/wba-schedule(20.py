@@ -1,43 +1,28 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[2]:
 
-import os
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify
 import time
-import shutil
-import chromedriver_autoinstaller
-import logging
-
-from selenium.webdriver.chrome.service import Service
-import shutil
 
 app = Flask(__name__)
-logging.basicConfig(level=logging.DEBUG)
-
-@app.route("/")
-def home():
-    chrome_path = shutil.which("google-chrome") or shutil.which("chromium-browser")
-    logging.debug(f"Chrome path: {chrome_path}")
-    return 'home'
 
 @app.route('/wba-schedule', methods=['GET'])
 def get_wba_schedule():
     # ✅ Chrome 옵션 설정
-    options = webdriver.ChromeOptions()
-    options.binary_location = "/usr/bin/google-chrome"  # 명시적 지정
+    options = Options()
     options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
+    options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument("window-size=1920x1080")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 
-    chromedriver_path = chromedriver_autoinstaller.install()
-    service = Service(executable_path=chromedriver_path)
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(options=options)
 
     url = 'https://www.wbaboxing.com/wba-fights-schedule#'
     driver.get(url)
@@ -119,7 +104,6 @@ def get_wba_schedule():
     return jsonData
 
 if __name__ == "__main__": 
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(debug=True)
 
 
