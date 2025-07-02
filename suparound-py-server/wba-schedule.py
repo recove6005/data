@@ -18,7 +18,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return 'Hello from Flask.'
+    import shutil
+    return shutil.which("google-chrome")
 
 @app.route('/wba-schedule', methods=['GET'])
 def get_wba_schedule():
@@ -26,7 +27,7 @@ def get_wba_schedule():
     options = webdriver.ChromeOptions()
     options.binary_location = "/usr/bin/google-chrome"  # 명시적 지정
     options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
+    # options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 

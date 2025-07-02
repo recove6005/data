@@ -8,3 +8,6 @@ apt install -y ./google-chrome-stable_current_amd64.deb
 
 # Flask 앱 실행
 exec gunicorn wba-schedule:app --bind 0.0.0.0:$PORT
+
+which google-chrome
+google-chrome --version
