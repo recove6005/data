@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route("/")
 def home():
-    chrome_path = shutil.which("google-chrome")
+    chrome_path = shutil.which("google-chrome") or shutil.which("chromium-browser")
     logging.debug(f"Chrome path: {chrome_path}")
     return 'home'
 
