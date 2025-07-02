@@ -3,7 +3,6 @@
 
 # In[ ]:
 
-
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -11,15 +10,19 @@ from bs4 import BeautifulSoup
 from flask import Flask, jsonify
 import time
 import shutil
+import chromedriver_autoinstaller
+import logging
 
 from selenium.webdriver.chrome.service import Service
 import shutil
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route("/")
 def home():
-    print(shutil.which("google-chrome"))
+    chrome_path = shutil.which("google-chrome")
+    logging.debug(f"Chrome path: {chrome_path}")
     return 'home'
 
 @app.route('/wba-schedule', methods=['GET'])
@@ -32,7 +35,6 @@ def get_wba_schedule():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    import chromedriver_autoinstaller
     chromedriver_path = chromedriver_autoinstaller.install()
     service = Service(executable_path=chromedriver_path)
     driver = webdriver.Chrome(service=service, options=options)
