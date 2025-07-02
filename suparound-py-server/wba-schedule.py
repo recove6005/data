@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify
 import time
+import shutil
 
 from selenium.webdriver.chrome.service import Service
 import shutil
@@ -18,8 +19,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    import shutil
-    return shutil.which("google-chrome")
+    print(shutil.which("google-chrome"))
+    return 'home'
 
 @app.route('/wba-schedule', methods=['GET'])
 def get_wba_schedule():
