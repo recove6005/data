@@ -2,9 +2,10 @@
 # coding: utf-8
 
 # In[ ]:
+import chromedriver_autoinstaller
+chromedriver_autoinstaller.install()
 
 import os
-import chromedriver_binary
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
