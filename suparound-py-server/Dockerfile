@@ -1,6 +1,6 @@
 FROM python:3.13-slim
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     unzip \
     curl \
@@ -22,8 +22,8 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
-    libvulkan1 \    # 이 줄 추가
-    --no-install-recommends && rm -rf /var/lib/apt/lists/*
+    libvulkan1 && rm -rf /var/lib/apt/lists/*
+
 
 # 구글 크롬 설치
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
