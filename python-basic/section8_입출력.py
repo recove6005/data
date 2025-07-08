@@ -142,4 +142,3 @@ with open("profile.pickle", "rb") as profile_file:
 with open("study.txt", "w", encoding="utf8") as study_file:
     study_file.write("I'm studing python.")
 
-
