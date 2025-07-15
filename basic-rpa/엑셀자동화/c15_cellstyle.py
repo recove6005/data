@@ -1,5 +1,5 @@
 from openpyxl import load_workbook
-from openpyxl.styles import Font, Border, Side
+from openpyxl.styles import Font, Border, Side, PatternFill, Alignment
 wb = load_workbook("sample.xlsx")
 ws = wb.active
 
@@ -28,8 +28,22 @@ b1.border = bold_border
 c1.border = dot_border
 
 # 셀 색상 변경
+for row in ws.rows:
+    for cell in row:
+        # 각 cell에 대해 중앙 정렬
+        cell.alignment = Alignment(horizontal="center", vertical="center") 
 
+        # A번호열은 제외
+        if cell.column == 1: 
+            continue
+    
+        # cell이 정수형 데이터이고 90점보다 높으면
+        if isinstance(cell.value, int) and cell.value > 90:
+            # 배경색을 초록색으로
+            cell.fill = PatternFill(fgColor="00ff00", fill_type="solid") 
+            cell.fond = Font(color="FF0000") # 폰트 색상 변경
 
-
+# 틀 고정
+ws.freeze_panes = "B2" # B2 기준으로 틀 고정
 
 wb.save("sample_style.xlsx")
